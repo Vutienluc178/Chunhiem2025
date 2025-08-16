@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="App Sinh Prompt Giáo Dục: tạo nhanh prompt cho 7 tình huống giảng dạy phổ biến." />
+  <title>App Sinh Prompt Giáo Dục</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .prompt-output { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header -->
+  <div class="gradient-bg text-white py-8">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <div class="mb-4">
+        <p class="text-sm opacity-80">Tác giả: <strong>Thầy Vũ Tiến Lực</strong></p>
+        <p class="text-sm opacity-75">Trường THPT Nguyễn Hữu Cảnh</p>
+      </div>
+      <h1 class="text-4xl font-bold mb-2">🎓 App Sinh Prompt Giáo Dục</h1>
+      <p class="text-xl opacity-90">Tạo prompt tự động cho 7 tình huống giảng dạy phổ biến</p>
+    </div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <!-- User Guide -->
+    <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-bold text-gray-800">📖 Hướng Dẫn Sử Dụng</h2>
+        <button onclick="toggleGuide()" id="guideToggle" class="text-blue-600 hover:text-blue-800 font-medium">
+          👁️ Xem hướng dẫn
+        </button>
+      </div>
+
+      <div id="guideContent" class="hidden space-y-6">
+        <!-- Quick Start -->
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">🚀 Bắt Đầu Nhanh</h3>
+          <ol class="list-decimal list-inside space-y-2 text-gray-700">
+            <li><strong>Chọn mẫu:</strong> Click vào một trong 7 mẫu prompt phía dưới</li>
+            <li><strong>Điền thông tin:</strong> Nhập đầy đủ các trường bắt buộc trong form</li>
+            <li><strong>Tạo prompt:</strong> Nhấn nút "✨ Sinh Prompt" để tạo</li>
+            <li><strong>Sử dụng AI:</strong> Chọn một trong 5 AI để sử dụng prompt ngay</li>
+          </ol>
+        </div>
+
+        <!-- AI Platforms -->
+        <div class="bg-green-50 border-l-4 border-green-400 p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">🤖 5 Nền Tảng AI Hỗ Trợ</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div class="space-y-2">
+              <div class="flex items-center gap-2"><span class="text-green-600">🤖</span><strong>ChatGPT</strong> - AI mạnh</div>
+              <div class="flex items-center gap-2"><span class="text-purple-600">✨</span><strong>Gemini</strong> - AI của Google</div>
+              <div class="flex items-center gap-2"><span class="text-blue-600">🧠</span><strong>Claude</strong> - Anthropic</div>
+            </div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2"><span class="text-blue-500">🔷</span><strong>Copilot</strong> - Microsoft</div>
+              <div class="flex items-center gap-2"><span class="text-orange-500">🦙</span><strong>Perplexity</strong> - Tìm kiếm thông minh</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Template Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-gray-800 flex items-center">🎯 Các Mẫu Prompt</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start space-x-3">
+                <span class="text-xl">📊</span>
+                <div>
+                  <div class="font-medium">Bảng điểm & nhận xét</div>
+                  <div class="text-gray-600">Tự động tạo bảng điểm Excel với nhận xét cá nhân</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-xl">📅</span>
+                <div>
+                  <div class="font-medium">Kế hoạch quản lý lớp</div>
+                  <div class="text-gray-600">Lập kế hoạch tuần</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-xl">📢</span>
+                <div>
+                  <div class="font-medium">Thông báo phụ huynh</div>
+                  <div class="text-gray-600">Soạn thông báo ngắn gọn</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-xl">🎤</span>
+                <div>
+                  <div class="font-medium">Kịch bản họp phụ huynh</div>
+                  <div class="text-gray-600">15 phút, truyền cảm hứng</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-gray-800 flex items-center">💡 Mẫu Prompt (tiếp)</h3>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start space-x-3">
+                <span class="text-xl">📈</span>
+                <div>
+                  <div class="font-medium">Báo cáo tháng</div>
+                  <div class="text-gray-600">Tổng kết cho PH</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-xl">💬</span>
+                <div>
+                  <div class="font-medium">Lời nhắn khích lệ</div>
+                  <div class="text-gray-600">Cá nhân hóa động viên</div>
+                </div>
+              </div>
+              <div class="flex items-start space-x-3">
+                <span class="text-xl">🧹</span>
+                <div>
+                  <div class="font-medium">Lịch trực nhật</div>
+                  <div class="text-gray-600">Phân công tự động</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+          <h3 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">💡 Mẹo Sử Dụng Hiệu Quả</h3>
+          <ul class="list-disc list-inside space-y-2 text-gray-700 text-sm">
+            <li><strong>Chuẩn bị dữ liệu:</strong> Danh sách HS, điểm số, lịch trình...</li>
+            <li><strong>Tùy chỉnh giọng điệu:</strong> Phù hợp đối tượng</li>
+            <li><strong>Kiểm tra kỹ:</strong> Chỉnh sửa prompt trước khi dùng</li>
+            <li><strong>Lưu trữ:</strong> Lưu prompt hay dùng để tái sử dụng</li>
+            <li><strong>Cá nhân hóa:</strong> Thêm tên trường, GV, lớp</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template Selection -->
+    <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">📋 Chọn Mẫu Prompt</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <button onclick="selectTemplate(1, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+          <div class="text-2xl mb-2">📊</div>
+          <div class="font-semibold text-gray-800">Bảng điểm & nhận xét</div>
+          <div class="text-sm text-gray-600">Tạo bảng điểm tự động</div>
+        </button>
+        <button onclick="selectTemplate(2, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+          <div class="text-2xl mb-2">📅</div>
+          <div class="font-semibold text-gray-800">Kế hoạch quản lý lớp</div>
+          <div class="text-sm text-gray-600">Lập kế hoạch hàng tuần</div>
+        </button>
+        <button onclick="selectTemplate(3, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+          <div class="text-2xl mb-2">📢</div>
+          <div class="font-semibold text-gray-800">Thông báo phụ huynh</div>
+          <div class="text-sm text-gray-600">Soạn thông báo ngắn gọn</div>
+        </button>
+        <button onclick="selectTemplate(4, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+          <div class="text-2xl mb-2">📈</div>
+          <div class="font-semibold text-gray-800">Báo cáo tháng</div>
+          <div class="text-sm text-gray-600">Tổng kết cho phụ huynh</div>
+        </button>
+        <button onclick="selectTemplate(5, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-50 hover:border-blue-500 transition-all text-left">
+          <div class="text-2xl mb-2">💬</div>
+          <div class="font-semibold text-gray-800">Lời nhắn khích lệ</div>
+          <div class="text-sm text-gray-600">Cá nhân hóa động viên HS</div>
+        </button>
+        <button onclick="selectTemplate(6, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+          <div class="text-2xl mb-2">🧹</div>
+          <div class="font-semibold text-gray-800">Lịch trực nhật</div>
+          <div class="text-sm text-gray-600">Phân công tự động</div>
+        </button>
+        <button onclick="selectTemplate(7, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+          <div class="text-2xl mb-2">🎤</div>
+          <div class="font-semibold text-gray-800">Kịch bản họp phụ huynh</div>
+          <div class="text-sm text-gray-600">Ngắn gọn & truyền cảm hứng</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Form Container -->
+    <div id="formContainer" class="bg-white rounded-xl card-shadow p-6 mb-8 hidden">
+      <div class="flex items-center justify-between mb-6">
+        <h2 id="formTitle" class="text-2xl font-bold text-gray-800"></h2>
+        <button onclick="clearForm()" class="text-gray-500 hover:text-gray-700 text-sm">🔄 Làm mới</button>
+      </div>
+      <form id="promptForm" class="space-y-6"></form>
+      <div class="mt-8 flex flex-wrap gap-4">
+        <button onclick="generatePrompt()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">
+          ✨ Sinh Prompt
+        </button>
+        <button onclick="copyPrompt()" id="copyBtn" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all hidden">
+          📋 Sao chép
+        </button>
+      </div>
+    </div>
+
+    <!-- Generated Prompt Output -->
+    <div id="promptOutput" class="prompt-output rounded-xl p-6 text-white hidden">
+      <h3 class="text-xl font-bold mb-4">🎯 Prompt Đã Tạo</h3>
+      <div id="generatedPrompt" class="bg-white bg-opacity-20 rounded-lg p-4 font-mono text-sm leading-relaxed"></div>
+
+      <!-- AI Platforms -->
+      <div class="mt-6 bg-white bg-opacity-10 rounded-lg p-4">
+        <h4 class="text-lg font-semibold mb-3">🚀 Chọn AI để Sử Dụng Ngay</h4>
+        <p class="text-sm opacity-90 mb-4">Prompt đã được sao chép (nếu trình duyệt cho phép). Có thể bấm “Sao chép” nếu chưa được.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center gap-2 justify-center">🤖 ChatGPT</a>
+          <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center gap-2 justify-center">✨ Gemini</a>
+          <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center gap-2 justify-center">🧠 Claude</a>
+          <a href="https://copilot.microsoft.com" target="_blank" rel="noopener noreferrer" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center gap-2 justify-center">🔷 Copilot</a>
+          <a href="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-3 rounded-lg text-sm font-medium transition-all flex items-center gap-2 justify-center">🦙 Perplexity</a>
+        </div>
+        <div class="mt-4 bg-white bg-opacity-10 rounded-lg p-3">
+          <p class="text-xs opacity-75">💡 <strong>Hướng dẫn:</strong> Mở AI, dán prompt và bắt đầu!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script defer>
+    const templates = {
+      1: {
+        title: "📊 Tạo bảng điểm & nhận xét học sinh tự động",
+        fields: [
+          { name: "grade_file_url", label: "📂 File điểm số", type: "text", placeholder: "Link hoặc tên file Excel/CSV" },
+          { name: "subjects", label: "📚 Môn học", type: "text", placeholder: "Toán, Văn, Anh, Lý, Hóa..." },
+          { name: "grading_scale", label: "📏 Thang điểm", type: "select", options: ["0-10", "0-100", "A-F"] },
+          { name: "classification_rules", label: "🏷️ Tiêu chí xếp loại", type: "text", placeholder: "VD: Giỏi ≥ 8.0, Khá ≥ 6.5..." },
+          { name: "tone", label: "🎤 Giọng văn nhận xét", type: "select", options: ["khích lệ", "nghiêm túc", "thân thiện"] },
+          { name: "excel_theme", label: "🎨 Màu bảng điểm", type: "select", options: ["xanh dương", "xanh lá", "cam"] }
+        ],
+        template:
+          "Bạn là một trợ lý AI chuyên nghiệp, hãy tạo bảng điểm từ {grade_file_url}. Danh sách môn: {subjects}. Thang điểm: {grading_scale}. Xếp loại theo quy tắc: {classification_rules}. Mỗi học sinh gồm: tên, điểm trung bình từng môn, xếp loại, nhận xét riêng (giọng văn {tone}). Xuất Excel có màu {excel_theme}."
+      },
+      2: {
+        title: "📅 Lập kế hoạch quản lý lớp học hàng tuần",
+        fields: [
+          { name: "class_name", label: "🏫 Lớp", type: "text", placeholder: "VD: 10A1" },
+          { name: "headcount", label: "👥 Sĩ số", type: "number", placeholder: "35" },
+          { name: "week_start_date", label: "📅 Tuần bắt đầu", type: "date" },
+          { name: "timetable", label: "📖 Lịch học chi tiết", type: "textarea", placeholder: "T2: Toán, Văn... T3: Anh, Lý..." },
+          { name: "extracurriculars", label: "🎉 Hoạt động ngoại khóa", type: "text", placeholder: "Câu lạc bộ, thể thao..." },
+          { name: "focus_goals", label: "🎯 Mục tiêu tuần", type: "select", options: ["học tập", "nề nếp", "phong trào"] },
+          { name: "watchlist_groups", label: "👀 Nhóm HS cần lưu ý", type: "text", placeholder: "HS yếu, HS nghỉ nhiều..." }
+        ],
+        template:
+          "Bạn là GVCN dày dặn kinh nghiệm. Dựa trên thông tin lớp {class_name} ({headcount} HS), tuần bắt đầu {week_start_date}, lịch học: {timetable}, ngoại khóa: {extracurriculars}, mục tiêu tuần: {focus_goals}, nhóm HS cần lưu ý: {watchlist_groups}. Hãy lập kế hoạch quản lý lớp gồm: công việc, lưu ý theo nhóm, lịch giao bài, hoạt động gắn kết."
+      },
+      3: {
+        title: "📢 Soạn thông báo gửi phụ huynh ngắn gọn, chuyên nghiệp",
+        fields: [
+          { name: "class_name", label: "🏫 Lớp", type: "text", placeholder: "VD: 10A1" },
+          { name: "meeting_datetime", label: "📅 Thời gian họp", type: "datetime-local" },
+          { name: "meeting_location", label: "📍 Địa điểm", type: "text", placeholder: "Phòng học, hội trường..." },
+          { name: "agenda_points", label: "📝 Nội dung chính", type: "textarea", placeholder: "Họp phụ huynh, thi học kỳ..." },
+          { name: "sender_role", label: "👤 Người gửi", type: "select", options: ["GVCN", "BGH"] },
+          { name: "contact_phone", label: "☎️ Liên hệ", type: "text", placeholder: "0123456789" }
+        ],
+        template:
+          "Hãy viết một thông báo ngắn gọn (≤80 từ) gửi Zalo nhóm PHHS lớp {class_name}. Thời gian: {meeting_datetime}, địa điểm: {meeting_location}, nội dung: {agenda_points}. Người gửi: {sender_role}. Liên hệ: {contact_phone}. Văn phong trang trọng, rõ ràng."
+      },
+      4: {
+        title: "📈 Tạo báo cáo tổng kết tháng cho phụ huynh",
+        fields: [
+          { name: "class_name", label: "🏫 Lớp", type: "text", placeholder: "VD: 10A1" },
+          { name: "month", label: "🗓️ Tháng báo cáo", type: "month" },
+          { name: "overall_academic_summary", label: "📊 Tình hình học tập chung", type: "textarea", placeholder: "Điểm trung bình, tỷ lệ đạt..." },
+          { name: "highlight_activities", label: "🎉 Hoạt động nổi bật", type: "textarea", placeholder: "Thi đua, cuộc thi..." },
+          { name: "outstanding_students", label: "🌟 HS tiêu biểu", type: "text", placeholder: "Tên học sinh xuất sắc" },
+          { name: "students_needing_support", label: "🆘 HS cần hỗ trợ", type: "text", placeholder: "Tên học sinh cần quan tâm" },
+          { name: "upcoming_events", label: "📌 Sự kiện sắp tới", type: "textarea", placeholder: "Thi học kỳ, hoạt động..." }
+        ],
+        template:
+          "Bạn là trợ lý báo cáo giáo dục. Hãy viết báo cáo tháng {month} cho phụ huynh lớp {class_name}, gồm: tình hình học tập {overall_academic_summary}, hoạt động nổi bật {highlight_activities}, HS tiêu biểu {outstanding_students}, HS cần hỗ trợ {students_needing_support}, sự kiện tới {upcoming_events}. Ngôn ngữ thân thiện, chuyên nghiệp."
+      },
+      5: {
+        title: "💬 Cá nhân hóa lời nhắn khích lệ học sinh",
+        fields: [
+          { name: "scenarios", label: "🎭 Các tình huống", type: "select", options: ["đạt thành tích", "tiến bộ", "khó khăn", "trước thi"] },
+          { name: "max_words_per_message", label: "🔢 Giới hạn từ", type: "number", placeholder: "30", value: "30" },
+          { name: "tone", label: "🎤 Giọng điệu", type: "select", options: ["truyền cảm hứng", "ấm áp", "vui vẻ"] },
+          { name: "include_student_name_placeholder", label: "🧑‍🎓 Chèn tên HS", type: "select", options: ["ON", "OFF"] }
+        ],
+        template:
+          "Hãy viết 10 lời nhắn khích lệ học sinh theo tình huống {scenarios}. Mỗi câu ≤ {max_words_per_message} từ, giọng {tone}. Có thể chèn tên bằng {Ten} nếu {include_student_name_placeholder} = ON."
+      },
+      6: {
+        title: "🧹 Tạo lịch trực nhật tự động",
+        fields: [
+          { name: "class_name", label: "🏫 Lớp", type: "text", placeholder: "VD: 10A1" },
+          { name: "student_list", label: "👥 Danh sách HS", type: "textarea", placeholder: "Nguyễn Văn A, Trần Thị B..." },
+          { name: "weeks", label: "📅 Số tuần", type: "number", placeholder: "4", value: "4" },
+          { name: "duties", label: "🧹 Công việc", type: "text", placeholder: "quét lớp, lau bảng, tưới cây, xếp bàn" },
+          { name: "min_turns_per_student", label: "📊 Mỗi HS tối thiểu", type: "number", placeholder: "2" },
+          { name: "pairing_policy", label: "👯 Ghép nhóm", type: "select", options: ["1", "2", "nhóm 4"] }
+        ],
+        template:
+          "Hãy tạo lịch trực nhật cho lớp {class_name}, {student_list} HS, trong {weeks} tuần. Công việc: {duties}, mỗi HS tối thiểu {min_turns_per_student} lần, theo quy tắc {pairing_policy}. Xuất bảng Excel kèm hướng dẫn in."
+      },
+      7: {
+        title: "🎤 Soạn kịch bản họp phụ huynh ngắn gọn & truyền cảm hứng",
+        fields: [
+          { name: "theme", label: "🏷️ Chủ đề họp", type: "text", placeholder: "VD: Định hướng học tập, Kết quả học kỳ..." },
+          { name: "class_achievements", label: "🏆 Thành tích lớp", type: "textarea", placeholder: "Giải nhất thi học sinh giỏi, 95% HS đạt điểm khá giỏi..." },
+          { name: "community_activities", label: "🤝 Hoạt động gắn kết", type: "textarea", placeholder: "Dã ngoại, từ thiện, thi tài năng..." },
+          { name: "closing_message", label: "📝 Thông điệp kết", type: "textarea", placeholder: "Lời cảm ơn, kêu gọi hợp tác..." },
+          { name: "speaker_style", label: "🎤 Phong cách nói", type: "select", options: ["ấm áp", "truyền cảm hứng", "chuyên nghiệp"] }
+        ],
+        template:
+          "Hãy viết kịch bản họp phụ huynh 15 phút với chủ đề {theme}. Nội dung: lời chào mở đầu, thành tích lớp {class_achievements}, hoạt động gắn kết {community_activities}, lời kết {closing_message}. Phong cách: {speaker_style}."
+      }
+    };
+
+    let currentTemplate = null;
+
+    function selectTemplate(templateId, evt) {
+      currentTemplate = templates[templateId];
+      document.getElementById('formContainer').classList.remove('hidden');
+      document.getElementById('formTitle').textContent = currentTemplate.title;
+
+      // Clear previous selection highlight
+      document.querySelectorAll('.template-btn').forEach(btn => {
+        btn.classList.remove('border-blue-500', 'bg-blue-50');
+        btn.classList.add('border-gray-200');
+      });
+
+      // Highlight current
+      if (evt && evt.target) {
+        evt.target.closest('.template-btn').classList.add('border-blue-500', 'bg-blue-50');
+        evt.target.closest('.template-btn').classList.remove('border-gray-200');
+      }
+
+      generateForm();
+      document.getElementById('promptOutput').classList.add('hidden');
+      document.getElementById('copyBtn').classList.add('hidden');
+    }
+
+    function generateForm() {
+      const form = document.getElementById('promptForm');
+      form.innerHTML = '';
+
+      currentTemplate.fields.forEach(field => {
+        const fieldDiv = document.createElement('div');
+        fieldDiv.className = 'space-y-2';
+
+        const label = document.createElement('label');
+        label.className = 'block text-sm font-semibold text-gray-700';
+        label.textContent = field.label;
+
+        let input;
+        if (field.type === 'select') {
+          input = document.createElement('select');
+          input.className = 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent';
+          field.options.forEach(option => {
+            const optionEl = document.createElement('option');
+            optionEl.value = option;
+            optionEl.textContent = option;
+            input.appendChild(optionEl);
+          });
+        } else if (field.type === 'textarea') {
+          input = document.createElement('textarea');
+          input.className = 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent';
+          input.rows = 3;
+        } else {
+          input = document.createElement('input');
+          input.type = field.type;
+          input.className = 'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent';
+        }
+
+        input.name = field.name;
+        input.id = field.name;
+        if (field.placeholder) input.placeholder = field.placeholder;
+        if (field.value) input.value = field.value;
+
+        fieldDiv.appendChild(label);
+        fieldDiv.appendChild(input);
+        form.appendChild(fieldDiv);
+      });
+    }
+
+    function formatVietnameseDateTime(dateTimeString) {
+      if (!dateTimeString) return dateTimeString;
+      const date = new Date(dateTimeString);
+      const daysOfWeek = ['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'];
+      const dayOfWeek = daysOfWeek[date.getDay()];
+      const dd = String(date.getDate()).padStart(2, '0');
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const yyyy = date.getFullYear();
+      const hh = String(date.getHours()).padStart(2, '0');
+      const min = String(date.getMinutes()).padStart(2, '0');
+      return `${dayOfWeek}, ngày ${dd}/${mm}/${yyyy} lúc ${hh}:${min}`;
+    }
+
+    function formatVietnameseDate(dateString) {
+      if (!dateString) return dateString;
+      const date = new Date(dateString);
+      const daysOfWeek = ['Chủ nhật','Thứ hai','Thứ ba','Thứ tư','Thứ năm','Thứ sáu','Thứ bảy'];
+      const dayOfWeek = daysOfWeek[date.getDay()];
+      const dd = String(date.getDate()).padStart(2, '0');
+      const mm = String(date.getMonth() + 1).padStart(2, '0');
+      const yyyy = date.getFullYear();
+      return `${dayOfWeek}, ngày ${dd}/${mm}/${yyyy}`;
+    }
+
+    function formatVietnameseMonth(monthString) {
+      if (!monthString) return monthString;
+      const [year, month] = monthString.split('-');
+      return `tháng ${month}/${year}`;
+    }
+
+    function generatePrompt() {
+      if (!currentTemplate) return;
+      let prompt = currentTemplate.template;
+      const formData = new FormData(document.getElementById('promptForm'));
+
+      for (let [key, value] of formData.entries()) {
+        const placeholder = `{${key}}`;
+        let formattedValue = value || `[${key}]`;
+
+        if (key === 'meeting_datetime' && value) {
+          formattedValue = formatVietnameseDateTime(value);
+        } else if (key === 'week_start_date' && value) {
+          formattedValue = formatVietnameseDate(value);
+        } else if (key === 'month' && value) {
+          formattedValue = formatVietnameseMonth(value);
+        }
+
+        prompt = prompt.replace(new RegExp(placeholder, 'g'), formattedValue);
+      }
+
+      document.getElementById('generatedPrompt').textContent = prompt;
+      document.getElementById('promptOutput').classList.remove('hidden');
+      document.getElementById('copyBtn').classList.remove('hidden');
+
+      // Try auto-copy (may require user gesture; fallback is the button)
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(prompt).catch(() => {});
+      }
+
+      document.getElementById('promptOutput').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyPrompt() {
+      const promptText = document.getElementById('generatedPrompt').textContent;
+      if (!promptText) return;
+      const btn = document.getElementById('copyBtn');
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(promptText).then(() => successFlash(btn)).catch(() => fallbackCopy(btn, promptText));
+      } else {
+        fallbackCopy(btn, promptText);
+      }
+    }
+
+    function fallbackCopy(btn, text) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch(e) {}
+      document.body.removeChild(ta);
+      successFlash(btn);
+    }
+
+    function successFlash(btn) {
+      const original = btn.textContent;
+      btn.textContent = '✅ Đã sao chép!';
+      btn.classList.add('bg-green-500','text-white');
+      btn.classList.remove('bg-gray-200','text-gray-700');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('bg-green-500','text-white');
+        btn.classList.add('bg-gray-200','text-gray-700');
+      }, 2000);
+    }
+
+    function clearForm() {
+      document.getElementById('promptForm').reset();
+      document.getElementById('promptOutput').classList.add('hidden');
+      document.getElementById('copyBtn').classList.add('hidden');
+    }
+
+    function toggleGuide() {
+      const guideContent = document.getElementById('guideContent');
+      const guideToggle = document.getElementById('guideToggle');
+      const hidden = guideContent.classList.toggle('hidden');
+      guideToggle.textContent = hidden ? '👁️ Xem hướng dẫn' : '🙈 Ẩn hướng dẫn';
+    }
+  </script>
+
+  <!-- (ĐÃ GỠ) Cloudflare injected script không cần thiết cho GitHub Pages -->
+</body>
+</html>
