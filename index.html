@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="App Sinh Prompt Giáo Dục: tạo nhanh prompt cho 7 tình huống giảng dạy phổ biến." />
+  <meta name="theme-color" content="#667eea" />
   <title>App Sinh Prompt Giáo Dục</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -15,6 +16,12 @@
   </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
+  <noscript>
+    <div class="bg-yellow-100 text-yellow-900 p-3 text-center">
+      Ứng dụng cần bật JavaScript để hoạt động.
+    </div>
+  </noscript>
+
   <!-- Header -->
   <div class="gradient-bg text-white py-8">
     <div class="max-w-6xl mx-auto px-4 text-center">
@@ -32,7 +39,7 @@
     <div class="bg-white rounded-xl card-shadow p-6 mb-8">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-2xl font-bold text-gray-800">📖 Hướng Dẫn Sử Dụng</h2>
-        <button onclick="toggleGuide()" id="guideToggle" class="text-blue-600 hover:text-blue-800 font-medium">
+        <button type="button" onclick="toggleGuide()" id="guideToggle" class="text-blue-600 hover:text-blue-800 font-medium">
           👁️ Xem hướng dẫn
         </button>
       </div>
@@ -147,37 +154,37 @@
     <div class="bg-white rounded-xl card-shadow p-6 mb-8">
       <h2 class="text-2xl font-bold text-gray-800 mb-6">📋 Chọn Mẫu Prompt</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <button onclick="selectTemplate(1, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+        <button type="button" onclick="selectTemplate(1, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
           <div class="text-2xl mb-2">📊</div>
           <div class="font-semibold text-gray-800">Bảng điểm & nhận xét</div>
           <div class="text-sm text-gray-600">Tạo bảng điểm tự động</div>
         </button>
-        <button onclick="selectTemplate(2, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+        <button type="button" onclick="selectTemplate(2, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
           <div class="text-2xl mb-2">📅</div>
           <div class="font-semibold text-gray-800">Kế hoạch quản lý lớp</div>
           <div class="text-sm text-gray-600">Lập kế hoạch hàng tuần</div>
         </button>
-        <button onclick="selectTemplate(3, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+        <button type="button" onclick="selectTemplate(3, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
           <div class="text-2xl mb-2">📢</div>
           <div class="font-semibold text-gray-800">Thông báo phụ huynh</div>
           <div class="text-sm text-gray-600">Soạn thông báo ngắn gọn</div>
         </button>
-        <button onclick="selectTemplate(4, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+        <button type="button" onclick="selectTemplate(4, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
           <div class="text-2xl mb-2">📈</div>
           <div class="font-semibold text-gray-800">Báo cáo tháng</div>
           <div class="text-sm text-gray-600">Tổng kết cho phụ huynh</div>
         </button>
-        <button onclick="selectTemplate(5, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-50 hover:border-blue-500 transition-all text-left">
+        <button type="button" onclick="selectTemplate(5, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
           <div class="text-2xl mb-2">💬</div>
           <div class="font-semibold text-gray-800">Lời nhắn khích lệ</div>
           <div class="text-sm text-gray-600">Cá nhân hóa động viên HS</div>
         </button>
-        <button onclick="selectTemplate(6, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+        <button type="button" onclick="selectTemplate(6, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
           <div class="text-2xl mb-2">🧹</div>
           <div class="font-semibold text-gray-800">Lịch trực nhật</div>
           <div class="text-sm text-gray-600">Phân công tự động</div>
         </button>
-        <button onclick="selectTemplate(7, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
+        <button type="button" onclick="selectTemplate(7, event)" class="template-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-all text-left">
           <div class="text-2xl mb-2">🎤</div>
           <div class="font-semibold text-gray-800">Kịch bản họp phụ huynh</div>
           <div class="text-sm text-gray-600">Ngắn gọn & truyền cảm hứng</div>
@@ -189,14 +196,14 @@
     <div id="formContainer" class="bg-white rounded-xl card-shadow p-6 mb-8 hidden">
       <div class="flex items-center justify-between mb-6">
         <h2 id="formTitle" class="text-2xl font-bold text-gray-800"></h2>
-        <button onclick="clearForm()" class="text-gray-500 hover:text-gray-700 text-sm">🔄 Làm mới</button>
+        <button type="button" onclick="clearForm()" class="text-gray-500 hover:text-gray-700 text-sm">🔄 Làm mới</button>
       </div>
-      <form id="promptForm" class="space-y-6"></form>
+      <form id="promptForm" class="space-y-6" onsubmit="return false;"></form>
       <div class="mt-8 flex flex-wrap gap-4">
-        <button onclick="generatePrompt()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">
+        <button type="button" onclick="generatePrompt()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">
           ✨ Sinh Prompt
         </button>
-        <button onclick="copyPrompt()" id="copyBtn" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all hidden">
+        <button type="button" onclick="copyPrompt()" id="copyBtn" class="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-all hidden">
           📋 Sao chép
         </button>
       </div>
@@ -226,7 +233,7 @@
   </div>
 
   <!-- App Script -->
-  <script defer>
+  <script>
     const templates = {
       1: {
         title: "📊 Tạo bảng điểm & nhận xét học sinh tự động",
@@ -301,10 +308,10 @@
           { name: "weeks", label: "📅 Số tuần", type: "number", placeholder: "4", value: "4" },
           { name: "duties", label: "🧹 Công việc", type: "text", placeholder: "quét lớp, lau bảng, tưới cây, xếp bàn" },
           { name: "min_turns_per_student", label: "📊 Mỗi HS tối thiểu", type: "number", placeholder: "2" },
-          { name: "pairing_policy", label: "👯 Ghép nhóm", type: "select", options: ["1", "2", "nhóm 4"] }
+          { name: "pairing_policy", label: "👯 Ghép nhóm", type: "select", options: ["đơn", "cặp", "nhóm 4"] }
         ],
         template:
-          "Hãy tạo lịch trực nhật cho lớp {class_name}, {student_list} HS, trong {weeks} tuần. Công việc: {duties}, mỗi HS tối thiểu {min_turns_per_student} lần, theo quy tắc {pairing_policy}. Xuất bảng Excel kèm hướng dẫn in."
+          "Hãy tạo lịch trực nhật cho lớp {class_name}, danh sách: {student_list}, trong {weeks} tuần. Công việc: {duties}. Mỗi HS tối thiểu {min_turns_per_student} lần, theo quy tắc {pairing_policy}. Xuất bảng Excel kèm hướng dẫn in."
       },
       7: {
         title: "🎤 Soạn kịch bản họp phụ huynh ngắn gọn & truyền cảm hứng",
@@ -333,10 +340,11 @@
         btn.classList.add('border-gray-200');
       });
 
-      // Highlight current
-      if (evt && evt.target) {
-        evt.target.closest('.template-btn').classList.add('border-blue-500', 'bg-blue-50');
-        evt.target.closest('.template-btn').classList.remove('border-gray-200');
+      // Highlight current (robust to clicks on inner elements)
+      const btnEl = (evt && (evt.currentTarget || evt.target.closest('.template-btn'))) || null;
+      if (btnEl) {
+        btnEl.classList.add('border-blue-500', 'bg-blue-50');
+        btnEl.classList.remove('border-gray-200');
       }
 
       generateForm();
@@ -441,7 +449,7 @@
       document.getElementById('promptOutput').classList.remove('hidden');
       document.getElementById('copyBtn').classList.remove('hidden');
 
-      // Try auto-copy (may require user gesture; fallback is the button)
+      // Auto-copy nếu được phép
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(prompt).catch(() => {});
       }
@@ -455,7 +463,9 @@
       const btn = document.getElementById('copyBtn');
 
       if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(promptText).then(() => successFlash(btn)).catch(() => fallbackCopy(btn, promptText));
+        navigator.clipboard.writeText(promptText)
+          .then(() => successFlash(btn))
+          .catch(() => fallbackCopy(btn, promptText));
       } else {
         fallbackCopy(btn, promptText);
       }
@@ -496,7 +506,5 @@
       guideToggle.textContent = hidden ? '👁️ Xem hướng dẫn' : '🙈 Ẩn hướng dẫn';
     }
   </script>
-
-  <!-- (ĐÃ GỠ) Cloudflare injected script không cần thiết cho GitHub Pages -->
 </body>
 </html>
